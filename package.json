@@ -5,13 +5,16 @@
   "description": "Convert OpenSpec specs to Cucumber/Gherkin feature files",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/*.test.ts",
-    "test:coverage": "node --experimental-test-coverage --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "test:coverage": "node --experimental-test-coverage --test tests/*.test.ts",
+    "docs:build": "bash book/scripts/build-all.sh",
+    "docs:check": "bash book/scripts/check-parity.sh"
   },
   "devDependencies": {
     "@cucumber/gherkin": "^42.0.0",
     "@cucumber/messages": "^34.2.0",
     "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
     "typescript": "^5.5.0"
   }
 }

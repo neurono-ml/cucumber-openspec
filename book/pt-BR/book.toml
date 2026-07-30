@@ -1,0 +1,11 @@
+[book]
+title = "cucumber-openspec"
+description = "Converta especificações OpenSpec para arquivos .feature Cucumber/Gherkin"
+authors = ["neurono-ml"]
+language = "pt"
+
+[output.html]
+default-theme = "ayu"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/neurono-ml/cucumber-openspec"
+edit-url-template = "https://github.com/neurono-ml/cucumber-openspec/edit/main/book/pt-BR/src/{path}"

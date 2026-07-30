@@ -1,0 +1,751 @@
+<!DOCTYPE HTML>
+<html lang="pt" class="ayu sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>cucumber-openspec</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Converta especificações OpenSpec para arquivos .feature Cucumber/Gherkin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-a3625adb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-86174362.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">cucumber-openspec</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/neurono-ml/cucumber-openspec" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="cucumber-openspec"><a class="header" href="#cucumber-openspec">cucumber-openspec</a></h1>
+<p><a href="https://skills.sh/neurono-ml/cucumber-openspec"><img src="https://skills.sh/b/neurono-ml/cucumber-openspec" alt="skills.sh"></a>
+<a href="https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml"><img src="https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg" alt="CI/CD"></a>
+<a href="https://github.com/neurono-ml/cucumber-openspec"><img src="https://img.shields.io/badge/npm-cucumber--openspec-blue" alt="npm"></a></p>
+<p><strong>cucumber-openspec</strong> converte arquivos <a href="https://github.com/neurono-ml/openspec">OpenSpec</a> <code>spec.md</code> em arquivos <code>.feature</code> <a href="https://cucumber.io/">Cucumber</a> / Gherkin determinísticos.</p>
+<p>Ele usa <strong>scripts TypeScript determinísticos sem IA</strong> — um parser de máquina de estados + gerador — para produzir arquivos <code>.feature</code> corretos em qualquer um dos <a href="#localização">80 idiomas Gherkin</a>. Nenhuma dependência em tempo de execução além do Node.js.</p>
+<h2 id="início-rápido"><a class="header" href="#início-rápido">Início Rápido</a></h2>
+<pre><code class="language-bash"># Instale a skill para seu agente de IA
+npx skills add neurono-ml/cucumber-openspec
+
+# Converta as especificações de um projeto para Gherkin
+npx tsx scripts/index.ts -i ./openspec -o ./features
+</code></pre>
+<h2 id="funcionalidades"><a class="header" href="#funcionalidades">Funcionalidades</a></h2>
+<ul>
+<li><strong>Parser determinístico</strong> — máquina de estados, 0 dependências</li>
+<li><strong>80 idiomas Gherkin</strong> — português, inglês, chinês, árabe, japonês e mais 76</li>
+<li><strong>Tags</strong> — <code>@smoke</code>, <code>@regression</code>, <code>@critical</code> nos níveis Funcionalidade, Regra e Cenário</li>
+<li><strong>Background</strong> — etapas compartilhadas via seção <code>## Background</code></li>
+<li><strong>Scenario Outline + Examples</strong> — cenários parametrizados orientados a dados</li>
+<li><strong>DataTables</strong> — tabelas pipe como argumentos de etapas</li>
+<li><strong>Doc Strings</strong> — sub-itens convertidos em blocos <code>"""</code></li>
+<li><strong>Delta specs</strong> — seções ADICIONADO / MODIFICADO / REMOVIDO para gestão de mudanças</li>
+<li><strong>Validação gramatical Gherkin</strong> — toda saída validada via <code>@cucumber/gherkin</code></li>
+<li><strong>Localização</strong> — palavras-chave em 80 idiomas via traduções oficiais do Gherkin</li>
+<li><strong>Skill para Agente</strong> — instalável via <code>skills.sh</code>, compatível com Claude Code, Cursor, OpenCode, Codex</li>
+</ul>
+<h2 id="como-funciona"><a class="header" href="#como-funciona">Como Funciona</a></h2>
+<pre><code class="language-markdown">OpenSpec spec.md                     →   Gherkin .feature
+─────────────────────                    ─────────────────
+# [@tag] Domínio                        [@tag]
+## Propósito                            Funcionalidade: Domínio
+## Background                              Background:
+- **DADO** etapa                           Dado etapa
+### [@tag] Requisito: Nome                  [@tag]
+#### [@tag] Cenário: Nome                  Regra: Nome
+- **DADO** texto                              [@tag]
+  | col | col |                              Cenário: Nome
+- **QUANDO** texto                            Dado texto
+- **ENTÃO** texto                              | col | col |
+                                                Quando texto
+                                                Então texto
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="instalação"><a class="header" href="#instalação">Instalação</a></h1>
+<h2 id="como-skill-para-agente-recomendado"><a class="header" href="#como-skill-para-agente-recomendado">Como Skill para Agente (recomendado)</a></h2>
+<p>Instale via <a href="https://skills.sh/neurono-ml/cucumber-openspec">skills.sh</a> para qualquer agente compatível com SKILL.md:</p>
+<pre><code class="language-bash">npx skills add neurono-ml/cucumber-openspec
+</code></pre>
+<p>Funciona com:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Plataforma</th><th>Diretório da Skill</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a></td><td><code>~/.claude/skills/</code></td></tr>
+<tr><td><a href="https://cursor.sh/">Cursor</a></td><td><code>~/.cursor/skills/</code></td></tr>
+<tr><td><a href="https://github.com/opencode-ai">OpenCode</a></td><td><code>~/.config/opencode/skills/</code></td></tr>
+<tr><td><a href="https://github.com/openai/codex">Codex</a></td><td><code>~/.agents/skills/</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Após a instalação, a skill estará disponível na sua próxima conversa.</p>
+<h2 id="pelo-github-clone-manual"><a class="header" href="#pelo-github-clone-manual">Pelo GitHub (clone manual)</a></h2>
+<pre><code class="language-bash">git clone https://github.com/neurono-ml/cucumber-openspec.git ~/.agents/skills/cucumber-openspec
+</code></pre>
+<h2 id="usando-npm--npx-uso-direto"><a class="header" href="#usando-npm--npx-uso-direto">Usando npm / npx (uso direto)</a></h2>
+<p>Nenhuma instalação global é necessária. O projeto usa <code>npx tsx</code> para executar TypeScript diretamente:</p>
+<pre><code class="language-bash"># Clone o repositório
+git clone https://github.com/neurono-ml/cucumber-openspec.git
+cd cucumber-openspec
+
+# Instale as dependências
+npm ci
+
+# Use
+npx tsx scripts/index.ts -i ./openspec -o ./features
+</code></pre>
+<h2 id="pré-requisitos"><a class="header" href="#pré-requisitos">Pré-requisitos</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Requisito</th><th>Versão</th><th>Observações</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://nodejs.org/">Node.js</a></td><td>≥ 18</td><td>Necessário para executar os scripts</td></tr>
+<tr><td><a href="https://npmjs.com/">npm</a></td><td>≥ 9</td><td>Acompanha o Node.js</td></tr>
+<tr><td><a href="https://rust-lang.github.io/mdBook/">mdBook</a></td><td>≥ 0.5</td><td>Necessário apenas para construir a documentação</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="uso"><a class="header" href="#uso">Uso</a></h1>
+<h2 id="referência-da-cli"><a class="header" href="#referência-da-cli">Referência da CLI</a></h2>
+<pre><code class="language-bash">npx tsx scripts/index.ts [opções]
+</code></pre>
+<h3 id="opções"><a class="header" href="#opções">Opções</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Alias</th><th>Descrição</th><th>Padrão</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--input</code></td><td><code>-i</code></td><td>Caminho para o arquivo de especificação ou diretório openspec</td><td><strong>(obrigatório)</strong></td></tr>
+<tr><td><code>--output</code></td><td><code>-o</code></td><td>Diretório de saída para arquivos <code>.feature</code></td><td><code>./features</code></td></tr>
+<tr><td><code>--language</code></td><td><code>-l</code></td><td>Código do idioma Gherkin</td><td><code>en</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="caminhos-de-saída"><a class="header" href="#caminhos-de-saída">Caminhos de Saída</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Entrada</th><th>Saída</th></tr>
+</thead>
+<tbody>
+<tr><td><code>openspec/specs/auth/spec.md</code></td><td><code>features/auth.feature</code></td></tr>
+<tr><td><code>openspec/changes/add-auth/specs/auth/spec.md</code></td><td><code>features/add-auth_auth.feature</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="exemplos"><a class="header" href="#exemplos">Exemplos</a></h2>
+<h3 id="converter-um-único-arquivo-de-especificação"><a class="header" href="#converter-um-único-arquivo-de-especificação">Converter um único arquivo de especificação</a></h3>
+<pre><code class="language-bash">npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o features
+</code></pre>
+<p>Gera <code>features/auth.feature</code>.</p>
+<h3 id="converter-um-diretório-openspec-inteiro"><a class="header" href="#converter-um-diretório-openspec-inteiro">Converter um diretório OpenSpec inteiro</a></h3>
+<pre><code class="language-bash">npx tsx scripts/index.ts -i ./openspec -o ./features
+</code></pre>
+<p>Percorre <code>openspec/specs/&lt;dominio&gt;/spec.md</code> e todos os arquivos <code>openspec/changes/&lt;mudanca&gt;/specs/&lt;dominio&gt;/spec.md</code>.</p>
+<h3 id="converter-para-um-idioma-diferente"><a class="header" href="#converter-para-um-idioma-diferente">Converter para um idioma diferente</a></h3>
+<pre><code class="language-bash"># Português
+npx tsx scripts/index.ts -i ./openspec -o ./features -l pt
+
+# Chinês Simplificado
+npx tsx scripts/index.ts -i ./openspec -o ./features -l zh-CN
+
+# Árabe (direita para esquerda)
+npx tsx scripts/index.ts -i ./openspec -o ./features -l ar
+</code></pre>
+<h3 id="converter-uma-delta-change"><a class="header" href="#converter-uma-delta-change">Converter uma delta change</a></h3>
+<pre><code class="language-bash">npx tsx scripts/index.ts -i openspec/changes/add-auth/specs/auth/spec.md -o features
+</code></pre>
+<p>Isso gera <code>features/add-auth_auth.feature</code> com anotações de ADICIONADO/MODIFICADO/REMOVIDO.</p>
+<h2 id="estrutura-do-diretório-de-trabalho"><a class="header" href="#estrutura-do-diretório-de-trabalho">Estrutura do Diretório de Trabalho</a></h2>
+<pre><code>projeto/
+├── openspec/
+│   ├── specs/
+│   │   ├── auth/
+│   │   │   └── spec.md
+│   │   └── billing/
+│   │       └── spec.md
+│   └── changes/
+│       └── add-auth/
+│           └── specs/
+│               └── auth/
+│                   └── spec.md
+└── features/              # ← gerado
+    ├── auth.feature
+    ├── billing.feature
+    └── add-auth_auth.feature
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="tags"><a class="header" href="#tags">Tags</a></h1>
+<p>O cucumber-openspec suporta <a href="https://cucumber.io/docs/cucumber/api/#tags">tags Gherkin</a> em três níveis: <strong>Funcionalidade</strong> (via H1), <strong>Requisito</strong> (via H3 Regra) e <strong>Cenário</strong> (via H4).</p>
+<p>Tags são separadas por espaço, prefixadas com <code>@</code> e aceitam hífens: <code>@smoke</code>, <code>@regression</code>, <code>@integration-test</code>.</p>
+<h2 id="tags-em-nível-de-funcionalidade"><a class="header" href="#tags-em-nível-de-funcionalidade">Tags em Nível de Funcionalidade</a></h2>
+<p>Adicione tags antes do nome do domínio no cabeçalho H1:</p>
+<pre><code class="language-markdown"># @smoke @regression Especificação de Autenticação
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin">@smoke @regression
+Funcionalidade: Autenticação
+</code></pre>
+<h2 id="tags-em-nível-de-requisito"><a class="header" href="#tags-em-nível-de-requisito">Tags em Nível de Requisito</a></h2>
+<p>Adicione tags antes de <code>Requisito:</code> no cabeçalho H3:</p>
+<pre><code class="language-markdown">### @critical @lento Requisito: Login
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin">  @critical @lento
+  Regra: Login
+</code></pre>
+<h2 id="tags-em-nível-de-cenário"><a class="header" href="#tags-em-nível-de-cenário">Tags em Nível de Cenário</a></h2>
+<p>Adicione tags antes de <code>Cenário:</code> no cabeçalho H4:</p>
+<pre><code class="language-markdown">#### @smoke @regression Cenário: Login Bem-sucedido
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin">    @smoke @regression
+    Cenário: Login Bem-sucedido
+</code></pre>
+<h2 id="exemplo-completo"><a class="header" href="#exemplo-completo">Exemplo Completo</a></h2>
+<pre><code class="language-markdown"># @smoke Especificação de Autenticação
+## Propósito
+Sistema de autenticação.
+
+### @critical Requisito: Login
+Texto do corpo.
+
+#### @smoke Cenário: Credenciais Válidas
+- **DADO** um usuário registrado
+- **QUANDO** ele enviar credenciais válidas
+- **ENTÃO** ele recebe um token
+</code></pre>
+<p>Arquivo <code>.feature</code> gerado:</p>
+<pre><code class="language-gherkin">@smoke
+Funcionalidade: Autenticação
+
+  Sistema de autenticação.
+
+  @critical
+  Regra: Login
+    Texto do corpo.
+
+    @smoke
+    Cenário: Credenciais Válidas
+      Dado um usuário registrado
+      Quando ele enviar credenciais válidas
+      Então ele recebe um token
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="background"><a class="header" href="#background">Background</a></h1>
+<p>Uma seção <a href="https://cucumber.io/docs/gherkin/reference/#background">Background</a> permite definir etapas compartilhadas que são executadas antes de cada cenário na funcionalidade.</p>
+<h2 id="sintaxe"><a class="header" href="#sintaxe">Sintaxe</a></h2>
+<p>Use <code>## Background</code> antes de qualquer cabeçalho <code>### Requisito:</code>, com a sintaxe padrão de etapas:</p>
+<pre><code class="language-markdown"># Especificação de Autenticação
+## Propósito
+Autenticação e autorização.
+
+## Background
+- **DADO** usuário está logado
+- **E** tem perfil de administrador
+- **E** a chave de API é válida
+
+### Requisito: Controle de Acesso
+#### Cenário: Painel do Administrador
+- **QUANDO** usuário acessa o painel
+- **ENTÃO** ele vê o painel administrativo
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin"># language: pt
+Funcionalidade: Autenticação
+
+  Autenticação e autorização.
+
+  Contexto:
+    Dado usuário está logado
+    E tem perfil de administrador
+    E a chave de API é válida
+
+  Regra: Controle de Acesso
+
+    Cenário: Painel do Administrador
+      Quando usuário acessa o painel
+      Então ele vê o painel administrativo
+</code></pre>
+<h2 id="regras"><a class="header" href="#regras">Regras</a></h2>
+<ul>
+<li>O Background deve ser colocado <strong>após</strong> <code>## Propósito</code> e <strong>antes</strong> de qualquer cabeçalho <code>### Requisito:</code> ou de cenário</li>
+<li>Etapas sem marcadores em negrito também funcionam: <code>- Dado usuário está logado</code> (correspondência de palavra-chave insensível a maiúsculas/minúsculas)</li>
+<li>O Background é renderizado uma vez por funcionalidade, antes de todas as Regras/Cenários</li>
+<li>Seções Background vazias não produzem saída</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="scenario-outline--examples"><a class="header" href="#scenario-outline--examples">Scenario Outline &amp; Examples</a></h1>
+<p><a href="https://cucumber.io/docs/gherkin/reference/#scenario-outline">Scenario Outlines</a> permitem executar o mesmo cenário com diferentes conjuntos de dados usando placeholders e uma tabela de exemplos.</p>
+<h2 id="sintaxe-1"><a class="header" href="#sintaxe-1">Sintaxe</a></h2>
+<p>Use <code>#### Scenario Outline:</code> em vez de <code>#### Scenario:</code>, depois documente variáveis parametrizadas com <code>&lt;angle_brackets&gt;</code> no texto das etapas. Adicione <code>##### Examples:</code> com uma tabela pipe fornecendo os dados.</p>
+<pre><code class="language-markdown">### Requisito: Login
+#### Esquema do Cenário: Login com diferentes perfis
+- **DADO** usuário &lt;perfil&gt;
+- **QUANDO** ele fizer login
+- **ENTÃO** ele vê &lt;painel&gt;
+
+##### Exemplos:
+| perfil  | painel          |
+| admin   | Painel Admin    |
+| visualizador | Visão Geral |
+| editor  | Editor de Conteúdo |
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin"># language: pt
+  Regra: Login
+
+    Esquema do Cenário: Login com diferentes perfis
+      Dado usuário &lt;perfil&gt;
+      Quando ele fizer login
+      Então ele vê &lt;painel&gt;
+
+    Exemplos:
+      | perfil  | painel          |
+      | admin   | Painel Admin    |
+      | visualizador | Visão Geral |
+      | editor  | Editor de Conteúdo |
+</code></pre>
+<h2 id="detecção-automática"><a class="header" href="#detecção-automática">Detecção Automática</a></h2>
+<p>Se você usar <code>##### Examples:</code> sob um <code>#### Scenario:</code> comum, ele é automaticamente promovido para Scenario Outline:</p>
+<pre><code class="language-markdown">#### Cenário: Login (auto-outline)
+- **DADO** usuário &lt;perfil&gt;
+- **QUANDO** fizer login
+- **ENTÃO** &lt;status&gt;
+
+##### Exemplos:
+| perfil | status   |
+| admin  | sucesso  |
+| convidado | negado |
+</code></pre>
+<h2 id="separadores-de-tabela-markdown"><a class="header" href="#separadores-de-tabela-markdown">Separadores de Tabela Markdown</a></h2>
+<p>Linhas de separação no estilo Markdown (<code>|---|---|</code>) em tabelas de exemplos são ignoradas automaticamente.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="datatables"><a class="header" href="#datatables">DataTables</a></h1>
+<p><a href="https://cucumber.io/docs/gherkin/reference/#data-tables">DataTables</a> no Gherkin fornecem dados estruturados como argumentos de etapas. No OpenSpec, tabelas pipe indentadas sob uma etapa são renderizadas como DataTables.</p>
+<h2 id="sintaxe-2"><a class="header" href="#sintaxe-2">Sintaxe</a></h2>
+<pre><code class="language-markdown">- **DADO** que os seguintes usuários existem:
+  | nome  | perfil | email            |
+  | Alice | admin  | alice@exemplo.com |
+  | Bob   | visualizador | bob@exemplo.com |
+- **QUANDO** o admin verificar permissões
+- **ENTÃO** a lista de usuários está correta
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin"># language: pt
+    Dado que os seguintes usuários existem:
+      | nome  | perfil | email            |
+      | Alice | admin  | alice@exemplo.com |
+      | Bob   | visualizador | bob@exemplo.com |
+    Quando o admin verificar permissões
+    Então a lista de usuários está correta
+</code></pre>
+<h2 id="regras-1"><a class="header" href="#regras-1">Regras</a></h2>
+<ul>
+<li>As tabelas pipe devem estar <strong>indentadas</strong> sob a etapa a que pertencem</li>
+<li>A primeira linha da pipe se torna o cabeçalho da DataTable</li>
+<li>As linhas subsequentes se tornam linhas de dados</li>
+<li>Uma etapa pode ter <strong>sub-itens</strong> (Doc String) ou uma <strong>tabela pipe</strong> (DataTable), mas não ambos</li>
+<li>DataTables funcionam em qualquer idioma Gherkin — o conteúdo da tabela é independente do idioma</li>
+</ul>
+<h2 id="comparação-doc-strings-vs-datatables"><a class="header" href="#comparação-doc-strings-vs-datatables">Comparação: Doc Strings vs DataTables</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Funcionalidade</th><th>Doc String</th><th>DataTable</th></tr>
+</thead>
+<tbody>
+<tr><td>Sintaxe</td><td>Linhas <code>- item</code> indentadas</td><td>Linhas `</td></tr>
+<tr><td>Saída Gherkin</td><td><code>""" ... """</code></td><td>`</td></tr>
+<tr><td>Melhor para</td><td>Texto livre, saída esperada</td><td>Dados estruturados chave-valor, múltiplas linhas</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="doc-strings"><a class="header" href="#doc-strings">Doc Strings</a></h1>
+<p><a href="https://cucumber.io/docs/gherkin/reference/#doc-strings">Doc Strings</a> permitem incluir blocos maiores de texto (saída esperada, JSON, XML, etc.) como argumentos de etapas.</p>
+<h2 id="sintaxe-3"><a class="header" href="#sintaxe-3">Sintaxe</a></h2>
+<p>No OpenSpec, sub-itens indentados sob uma etapa são convertidos em Doc Strings Gherkin:</p>
+<pre><code class="language-markdown">- **ENTÃO** o sistema retorna:
+  - status: sucesso
+  - token: abc123
+  - expira: 3600s
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin">    Então o sistema retorna:
+      """
+      - status: sucesso
+      - token: abc123
+      - expira: 3600s
+      """
+</code></pre>
+<h2 id="exemplo-do-mundo-real"><a class="header" href="#exemplo-do-mundo-real">Exemplo do Mundo Real</a></h2>
+<pre><code class="language-markdown">### Requisito: Resposta da API
+#### Cenário: Login Bem-sucedido
+- **DADO** credenciais válidas
+- **QUANDO** o endpoint de login é chamado
+- **ENTÃO** a resposta contém:
+  - Um token JWT
+  - Perfil do usuário com nome e email
+  - Timestamp de expiração da sessão
+- **E** o código de status é 200
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin"># language: pt
+  Regra: Resposta da API
+
+    Cenário: Login Bem-sucedido
+      Dado credenciais válidas
+      Quando o endpoint de login é chamado
+      Então a resposta contém:
+        """
+        - Um token JWT
+        - Perfil do usuário com nome e email
+        - Timestamp de expiração da sessão
+        """
+      E o código de status é 200
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="delta-specs"><a class="header" href="#delta-specs">Delta Specs</a></h1>
+<p>Delta specs rastreiam mudanças nos requisitos ao longo do tempo. O OpenSpec suporta três tipos de seção delta: <strong>ADICIONADO</strong>, <strong>MODIFICADO</strong> e <strong>REMOVIDO</strong>.</p>
+<h2 id="seções-delta"><a class="header" href="#seções-delta">Seções Delta</a></h2>
+<p>Dentro de uma spec de mudança em <code>openspec/changes/&lt;nome-da-mudanca&gt;/specs/</code>, use cabeçalhos H2 para marcar grupos de requisitos:</p>
+<pre><code class="language-markdown"># Especificação de Autenticação
+## Propósito
+Requisitos de autenticação atualizados.
+
+## REQUISITOS ADICIONADOS
+### Requisito: Login Biométrico
+#### Cenário: Autenticar com Impressão Digital
+- **DADO** uma impressão digital registrada
+- **QUANDO** o usuário escanear sua impressão digital
+- **ENTÃO** o acesso é concedido
+
+## REQUISITOS MODIFICADOS
+### Requisito: Renovação de Token (Anteriormente: expiração de 1 hora)
+#### Cenário: Fluxo de Renovação de Token
+- **DADO** um token válido
+- **QUANDO** o token estiver prestes a expirar
+- **ENTÃO** um novo token é retornado
+
+## REQUISITOS REMOVIDOS
+### Requisito: Suporte a Token Legado
+Funcionalidade removida — todos os tokens agora usam formato JWT.
+</code></pre>
+<p>Gera:</p>
+<pre><code class="language-gherkin">Funcionalidade: Autenticação
+
+  Requisitos de autenticação atualizados.
+
+  Regra: Login Biométrico
+
+    Cenário: Autenticar com Impressão Digital
+      # ADICIONADO
+      Dado uma impressão digital registrada
+      Quando o usuário escanear sua impressão digital
+      Então o acesso é concedido
+
+  Regra: Renovação de Token
+
+    # MODIFICADO: expiração de 1 hora
+    Cenário: Fluxo de Renovação de Token
+      Dado um token válido
+      Quando o token estiver prestes a expirar
+      Então um novo token é retornado
+
+  Regra: Suporte a Token Legado
+    Funcionalidade removida — todos os tokens agora usam formato JWT.
+    # REMOVIDO: Suporte a Token Legado — Funcionalidade removida ...
+</code></pre>
+<h2 id="caminhos-de-saída-1"><a class="header" href="#caminhos-de-saída-1">Caminhos de Saída</a></h2>
+<p>Delta specs seguem uma convenção de nomenclatura específica:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Entrada</th><th>Saída</th></tr>
+</thead>
+<tbody>
+<tr><td><code>openspec/changes/add-auth/specs/auth/spec.md</code></td><td><code>features/add-auth_auth.feature</code></td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="localização"><a class="header" href="#localização">Localização</a></h1>
+<p>O cucumber-openspec suporta todos os <strong>80 idiomas Gherkin</strong>. As palavras-chave para Funcionalidade, Regra, Cenário, Dado, Quando, Então, E, Mas, Contexto, Esquema do Cenário e Exemplos são automaticamente traduzidas usando os dados oficiais de idiomas do Gherkin.</p>
+<h2 id="uso-1"><a class="header" href="#uso-1">Uso</a></h2>
+<pre><code class="language-bash"># Português
+npx tsx scripts/index.ts -i ./openspec -o ./features -l pt
+
+# Japonês
+npx tsx scripts/index.ts -i ./openspec -o ./features -l ja
+
+# Árabe (RTL)
+npx tsx scripts/index.ts -i ./openspec -o ./features -l ar
+</code></pre>
+<h2 id="cabeçalho-de-idioma"><a class="header" href="#cabeçalho-de-idioma">Cabeçalho de Idioma</a></h2>
+<p>Para saída em idioma diferente do inglês, o cabeçalho <code># language:</code> é adicionado automaticamente:</p>
+<pre><code class="language-gherkin"># language: pt
+Funcionalidade: Autenticação
+
+  Contexto:
+    Dado que o usuário está logado
+
+  Regra: Login
+    Esquema do Cenário: Login com diferentes perfis
+      Dado usuário &lt;perfil&gt;
+      Quando fizer login
+      Então &lt;resultado&gt;
+
+    Exemplos:
+      | perfil | resultado |
+      | admin  | sucesso   |
+      | guest  | negado    |
+</code></pre>
+<h2 id="todos-os-80-idiomas"><a class="header" href="#todos-os-80-idiomas">Todos os 80 Idiomas</a></h2>
+<p>As traduções oficiais do Gherkin incluem:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Código</th><th>Idioma</th><th>Nome Nativo</th></tr>
+</thead>
+<tbody>
+<tr><td><code>en</code></td><td>Inglês</td><td>English</td></tr>
+<tr><td><code>pt</code></td><td>Português</td><td>português</td></tr>
+<tr><td><code>fr</code></td><td>Francês</td><td>français</td></tr>
+<tr><td><code>de</code></td><td>Alemão</td><td>Deutsch</td></tr>
+<tr><td><code>es</code></td><td>Espanhol</td><td>español</td></tr>
+<tr><td><code>it</code></td><td>Italiano</td><td>italiano</td></tr>
+<tr><td><code>ja</code></td><td>Japonês</td><td>日本語</td></tr>
+<tr><td><code>zh-CN</code></td><td>Chinês (Simplificado)</td><td>简体中文</td></tr>
+<tr><td><code>zh-TW</code></td><td>Chinês (Tradicional)</td><td>繁體中文</td></tr>
+<tr><td><code>ar</code></td><td>Árabe</td><td>العربية</td></tr>
+<tr><td><code>he</code></td><td>Hebraico</td><td>עברית</td></tr>
+<tr><td><code>ru</code></td><td>Russo</td><td>русский</td></tr>
+<tr><td><code>ko</code></td><td>Coreano</td><td>한국어</td></tr>
+<tr><td><code>…</code> e mais 68</td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p>Todas as traduções são provenientes do <a href="https://github.com/cucumber/cucumber">repositório oficial Cucumber Gherkin</a>.</p>
+<h2 id="idiomas-da-direita-para-a-esquerda-rtl"><a class="header" href="#idiomas-da-direita-para-a-esquerda-rtl">Idiomas da Direita para a Esquerda (RTL)</a></h2>
+<p>Árabe, Hebraico, Urdu, Farsi e outros idiomas RTL são totalmente suportados. O cabeçalho <code># language:</code> garante que o parser Gherkin lide corretamente com a direção RTL.</p>
+<h2 id="suporte-a-idioma-personalizado"><a class="header" href="#suporte-a-idioma-personalizado">Suporte a Idioma Personalizado</a></h2>
+<p>Para adicionar ou verificar um idioma, consulte o arquivo <a href="https://github.com/neurono-ml/cucumber-openspec/blob/main/scripts/gherkin-languages.json">gherkin-languages.json</a>. Envie um PR com adições seguindo o formato oficial do Cucumber.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

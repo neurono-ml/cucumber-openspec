@@ -1,0 +1,105 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  MDBOOK_VERSION: 0.5.2
+
+jobs:
+
+  # ────────────────────────────────────────────────────────
+  # Job 1: Run TypeScript test suite
+  # ────────────────────────────────────────────────────────
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  # ────────────────────────────────────────────────────────
+  # Job 2: Check documentation parity across 3 languages
+  #         and validate mdbook builds cleanly
+  # ────────────────────────────────────────────────────────
+  docs-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mdbook
+        run: |
+          wget -q "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          tar xzf "mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          chmod +x mdbook
+          sudo mv mdbook /usr/local/bin/
+      - name: Check file parity
+        run: bash book/scripts/check-parity.sh
+      - name: Build English docs
+        run: mdbook build book/en
+      - name: Build Portuguese docs
+        run: mdbook build book/pt-BR
+      - name: Build Chinese docs
+        run: mdbook build book/zh-CN
+
+  # ────────────────────────────────────────────────────────
+  # Job 3: Deploy mdbook to GitHub Pages (main only)
+  # ────────────────────────────────────────────────────────
+  deploy-pages:
+    if: github.ref == 'refs/heads/main'
+    needs: [test, docs-parity]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mdbook
+        run: |
+          wget -q "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          tar xzf "mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          chmod +x mdbook
+          sudo mv mdbook /usr/local/bin/
+      - name: Build all languages
+        run: bash book/scripts/build-all.sh
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./book/public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ────────────────────────────────────────────────────────
+  # Job 4: Create GitHub Release on tag push
+  # ────────────────────────────────────────────────────────
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [test, docs-parity]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          discussion_category_name: announcements

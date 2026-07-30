@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cucumber-openspec</title>
+<script>
+(function() {
+  var langs = ['en', 'pt-BR', 'zh-CN'];
+  var preferred = navigator.language || navigator.userLanguage || 'en';
+  var lang = 'en';
+  // Match primary language subtag
+  var primary = preferred.split('-')[0].toLowerCase();
+  if (primary === 'pt') lang = 'pt-BR';
+  else if (primary === 'zh') lang = 'zh-CN';
+  else if (primary === 'en') lang = 'en';
+  window.location.href = lang + '/';
+})();
+</script>
+</head>
+<body>
+<p>Redirecting to documentation…</p>
+<ul>
+  <li><a href="en/">English</a></li>
+  <li><a href="pt-BR/">Português (Brasil)</a></li>
+  <li><a href="zh-CN/">简体中文</a></li>
+</ul>
+</body>
+</html>
