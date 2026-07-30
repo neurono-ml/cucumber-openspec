@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://skills.sh/neurono-ml/cucumber-openspec"><img src="https://skills.sh/b/neurono-ml/cucumber-openspec" alt="skills.sh"></a>
+  <a href="https://skills.sh/neurono-ml/cucumber-openspec/cucumber-openspec"><img src="https://skills.sh/b/neurono-ml/cucumber-openspec/cucumber-openspec" alt="skills.sh"></a>
   <a href="https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml"><img src="https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg" alt="CI/CD"></a>
   <a href="https://neurono-ml.github.io/cucumber-openspec/"><img src="https://img.shields.io/badge/docs-mdBook-00B4CC?logo=mdbook" alt="docs"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT"></a>

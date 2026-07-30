@@ -1,6 +1,6 @@
 # cucumber-openspec
 
-[![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec)
+[![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec/cucumber-openspec)
 [![CI/CD](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg)](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/badge/npm-cucumber--openspec-blue)](https://github.com/neurono-ml/cucumber-openspec)
 
