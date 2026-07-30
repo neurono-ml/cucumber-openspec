@@ -1,12 +1,21 @@
 # cucumber-openspec
 
-[![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec)
+<p align="center">
+  <a href="https://neurono-ml.github.io/cucumber-openspec/en/"><img src="https://img.shields.io/badge/EN-English-blue?style=for-the-badge" alt="English"></a>
+  <a href="https://neurono-ml.github.io/cucumber-openspec/pt-BR/"><img src="https://img.shields.io/badge/PT--BR-Portugu%C3%AAs-green?style=for-the-badge" alt="Português"></a>
+  <a href="https://neurono-ml.github.io/cucumber-openspec/zh-CN/"><img src="https://img.shields.io/badge/ZH--CN-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red?style=for-the-badge" alt="简体中文"></a>
+</p>
+
+[![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec/cucumber-openspec)
 [![CI/CD](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg)](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/badge/npm-cucumber--openspec-blue)](https://github.com/neurono-ml/cucumber-openspec)
 
-**cucumber-openspec** 将 [OpenSpec](https://github.com/neurono-ml/openspec) 的 `spec.md` 文件转换为确定性的 [Cucumber](https://cucumber.io/) / Gherkin `.feature` 文件。
+**cucumber-openspec** 连接了[行为驱动开发](https://cucumber.io/docs/bdd/)（BDD）的两端：
 
-它使用**零 AI、确定性的 TypeScript 脚本**——一个状态机解析器与生成器——来生成正确的 `.feature` 文件，支持全部 [80 种 Gherkin 语言](features/localization.md)。除了 Node.js 外没有其他运行时依赖。
+- **🖊️ 编写** [OpenSpec](https://github.com/neurono-ml/openspec) 行为规范——一种简单、人类可读的 Markdown 格式，产品经理、QA 和开发人员都可以共同参与
+- **⚡ 转换** 为严格的 [Cucumber](https://cucumber.io/)/Gherkin `.feature` 文件——使用**零 AI、确定性的 TypeScript 脚本**（状态机解析器 + 生成器），支持全部 [80 种 Gherkin 语言](features/localization.md)。除了 Node.js 外没有其他运行时依赖
+
+结果？**一份 BDD 规范，两种格式。** 团队用简洁的 Markdown 编写和评审；自动化工具在 Cucumber、SpecFlow、Behave 或任何 BDD 框架中运行生成的 Gherkin。
 
 ## 快速开始
 

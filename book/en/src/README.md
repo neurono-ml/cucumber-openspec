@@ -1,12 +1,21 @@
 # cucumber-openspec
 
+<p align="center">
+  <a href="https://neurono-ml.github.io/cucumber-openspec/en/"><img src="https://img.shields.io/badge/EN-English-blue?style=for-the-badge" alt="English"></a>
+  <a href="https://neurono-ml.github.io/cucumber-openspec/pt-BR/"><img src="https://img.shields.io/badge/PT--BR-Portugu%C3%AAs-green?style=for-the-badge" alt="Português"></a>
+  <a href="https://neurono-ml.github.io/cucumber-openspec/zh-CN/"><img src="https://img.shields.io/badge/ZH--CN-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red?style=for-the-badge" alt="简体中文"></a>
+</p>
+
 [![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec/cucumber-openspec)
 [![CI/CD](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg)](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/badge/npm-cucumber--openspec-blue)](https://github.com/neurono-ml/cucumber-openspec)
 
-**cucumber-openspec** converts [OpenSpec](https://github.com/neurono-ml/openspec) `spec.md` files into deterministic [Cucumber](https://cucumber.io/) / Gherkin `.feature` files.
+**cucumber-openspec** bridges the two sides of [Behavior-Driven Development](https://cucumber.io/docs/bdd/) (BDD):
 
-It uses **zero-AI, deterministic TypeScript scripts** — a state-machine parser + generator — to produce correct `.feature` files in any of the [80 Gherkin languages](features/localization.md). No runtime dependencies beyond Node.js.
+- **✍️ Write** behavior specs in [OpenSpec](https://github.com/neurono-ml/openspec) — a simple, human-readable Markdown format that product managers, QA, and developers can all contribute to
+- **⚡ Convert** them deterministically into strict Cucumber/Gherkin `.feature` files — with **zero-AI, deterministic TypeScript** (state-machine parser + generator) in any of the [80 Gherkin languages](features/localization.md). No runtime dependencies beyond Node.js.
+
+The result? **One BDD spec, two formats.** Teams write and review in clean Markdown; automation runs the generated Gherkin in Cucumber, SpecFlow, Behave, or any BDD framework.
 
 ## Quick Start
 

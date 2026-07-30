@@ -1,12 +1,21 @@
 # cucumber-openspec
 
-[![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec)
+<p align="center">
+  <a href="https://neurono-ml.github.io/cucumber-openspec/en/"><img src="https://img.shields.io/badge/EN-English-blue?style=for-the-badge" alt="English"></a>
+  <a href="https://neurono-ml.github.io/cucumber-openspec/pt-BR/"><img src="https://img.shields.io/badge/PT--BR-Portugu%C3%AAs-green?style=for-the-badge" alt="Português"></a>
+  <a href="https://neurono-ml.github.io/cucumber-openspec/zh-CN/"><img src="https://img.shields.io/badge/ZH--CN-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red?style=for-the-badge" alt="简体中文"></a>
+</p>
+
+[![skills.sh](https://skills.sh/b/neurono-ml/cucumber-openspec/cucumber-openspec)](https://skills.sh/neurono-ml/cucumber-openspec/cucumber-openspec)
 [![CI/CD](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg)](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/badge/npm-cucumber--openspec-blue)](https://github.com/neurono-ml/cucumber-openspec)
 
-**cucumber-openspec** converte arquivos [OpenSpec](https://github.com/neurono-ml/openspec) `spec.md` em arquivos `.feature` [Cucumber](https://cucumber.io/) / Gherkin determinísticos.
+**cucumber-openspec** conecta os dois lados do [Behavior-Driven Development](https://cucumber.io/docs/bdd/) (BDD):
 
-Ele usa **scripts TypeScript determinísticos sem IA** — um parser de máquina de estados + gerador — para produzir arquivos `.feature` corretos em qualquer um dos [80 idiomas Gherkin](features/localization.md). Nenhuma dependência em tempo de execução além do Node.js.
+- **🖊️ Escreva** especificações de comportamento em [OpenSpec](https://github.com/neurono-ml/openspec) — um formato Markdown simples e legível que product managers, QA e desenvolvedores podem usar juntos
+- **⚡ Converta** deterministicamente em arquivos `.feature` [Cucumber](https://cucumber.io/)/Gherkin válidos — com **scripts TypeScript determinísticos sem IA** (parser de máquina de estados + gerador) em qualquer um dos [80 idiomas Gherkin](features/localization.md). Nenhuma dependência em tempo de execução além do Node.js.
+
+O resultado? **Uma especificação BDD, dois formatos.** Equipes escrevem e revisam em Markdown limpo; a automação executa o Gherkin gerado no Cucumber, SpecFlow, Behave ou qualquer framework BDD.
 
 ## Início Rápido
 

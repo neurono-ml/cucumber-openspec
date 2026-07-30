@@ -18,10 +18,18 @@
 
 ---
 
-**cucumber-openspec** converte especificações de comportamento [OpenSpec](https://github.com/neurono-ml/openspec) (arquivos `spec.md` em Markdown) em arquivos `.feature` [Cucumber](https://cucumber.io/)/Gherkin válidos — com **zero dependência de IA**, um **parser determinístico baseado em máquina de estados** e suporte a todos os **80 idiomas do Gherkin**.
+**cucumber-openspec** conecta os dois lados do [Behavior-Driven Development](https://cucumber.io/docs/bdd/) (BDD):
 
-> **Leia este documento em outros idiomas:**
-> [English](./README.md) &nbsp;|&nbsp; [简体中文](./README.zh-CN.md)
+- **🖊️ Escreva** especificações de comportamento em [OpenSpec](https://github.com/neurono-ml/openspec) — um formato Markdown simples e legível que product managers, QA e desenvolvedores podem usar juntos
+- **⚡ Converta** deterministicamente em arquivos `.feature` [Cucumber](https://cucumber.io/)/Gherkin válidos — com **zero dependência de IA**, um **parser determinístico baseado em máquina de estados** e suporte a todos os **80 idiomas do Gherkin**
+
+O resultado? **Uma especificação BDD, dois formatos.** Equipes escrevem e revisam em Markdown limpo; a automação executa o Gherkin gerado no Cucumber, SpecFlow, Behave ou qualquer framework BDD.
+
+> **🌐 Idioma**
+>
+> [![en](https://img.shields.io/badge/EN-English-blue?style=for-the-badge)](./README.md)
+> [![pt-BR](https://img.shields.io/badge/PT--BR-Portugu%C3%AAs-green?style=for-the-badge)](./README.pt-BR.md)
+> [![zh-CN](https://img.shields.io/badge/ZH--CN-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red?style=for-the-badge)](./README.zh-CN.md)
 
 ---
 
@@ -50,15 +58,30 @@ npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o ./features
 
 ---
 
-## 💡 Por que usar cucumber-openspec?
+## 💡 Por que cucumber-openspec?
 
-| Desafio | Solução |
+### O Fluxo BDD que Escala
+
+BDD promete colaboração entre produto, dev e QA — mas a maioria das equipes encontra uma barreira: **arquivos `.feature` do Gherkin são a fonte única da verdade, mas são difíceis de escrever colaborativamente.** cucumber-openspec resolve isso fazendo do [OpenSpec](https://github.com/neurono-ml/openspec) a fonte e do Gherkin a saída gerada.
+
+```
+OpenSpec (Markdown)  ──→  cucumber-openspec  ──→  Gherkin (.feature)
+     ↑                                                   ↓
+Produto / QA / Dev escrevem aqui          Cucumber / SpecFlow / Behat executam aqui
+```
+
+A chave: **OpenSpec é um superconjunto de Markdown orientado a testes.** Ele lê como um documento de design, mas mapeia 1:1 para construtos Gherkin. Não-desenvolvedores escrevem specs; desenvolvedores recebem testes executáveis. Ninguém manipula manualmente a sintaxe `.feature`.
+
+### Por que OpenSpec primeiro?
+
+| Problema | Abordagem OpenSpec-first |
 |---|---|
-| **Escrever Gherkin manualmente é tedioso** | Escreva specs concisas em Markdown — gere arquivos `.feature` instantaneamente |
-| **Gherkin gerado por IA é não confiável** | 0% de dependência de IA — parser determinístico produz o mesmo resultado sempre |
-| **Equipes multilíngues** | Todos os 80 idiomas Gherkin embutidos — sem tradução manual |
-| **Gestão de mudanças** | Seções delta (`ADDED`/`MODIFIED`/`REMOVED`) mapeadas diretamente para anotações Gherkin |
-| **Integração contínua** | Execute o conversor na CI — especificações viram documentação viva |
+| **Sintaxe Gherkin é verbosa e propensa a erros** | OpenSpec é Markdown limpo — escreva tópicos, não palavras-chave `Feature:`/`Scenario:` |
+| **Não-devs não conseguem escrever `.feature`** | Qualquer um que saiba Markdown pode escrever specs OpenSpec |
+| **Specs e testes divergem** | OpenSpec É a fonte — Gherkin é sempre regenerado a partir dela |
+| **Gherkin gerado por IA alucina** | 0% IA — parser determinístico dá o mesmo resultado sempre |
+| **Equipes multilíngues** | Escreva specs em inglês, gere Gherkin em todos os 80 idiomas |
+| **Specs evoluem com o tempo** | Seções delta ADDED/MODIFIED/REMOVED embutidas |
 | **Sem inchaço de runtime** | TypeScript puro, zero dependências npm em runtime |
 
 ---
@@ -67,10 +90,10 @@ npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o ./features
 
 ```mermaid
 flowchart LR
-    A["📄 OpenSpec spec.md\nMarkdown com Dado/Quando/Então"] --> B["🔍 openspec-parser.ts\nMáquina de estados determinística\n(0 deps)"]
+    A["✍️ OpenSpec Spec\nBDD em Markdown limpo\nProduto/QA/Dev escrevem aqui"] --> B["🔍 openspec-parser.ts\nMáquina de estados determinística\n(0 deps)"]
     B --> C["🏗️ AST OpenSpec\nFuncionalidade → Regra → Cenário\nTags • Contexto • DataTables • Esboços"]
-    C --> D["⚡ gherkin-generator.ts\nLocalização de palavras-chave\nMapeamento de Doc Strings"]
-    D --> E["✅ Arquivo .feature\nValidado via\n@cucumber/gherkin AST"]
+    C --> D["⚡ gherkin-generator.ts\n80 idiomas com keywords\nMapeamento de Doc Strings"]
+    D --> E["🧪 Gherkin Executável\nValidado via @cucumber/gherkin\nCucumber / SpecFlow / Behat"]
     
     style A fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
     style B fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1
