@@ -4,9 +4,12 @@
 [![CI/CD](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml/badge.svg)](https://github.com/neurono-ml/cucumber-openspec/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/badge/npm-cucumber--openspec-blue)](https://github.com/neurono-ml/cucumber-openspec)
 
-**cucumber-openspec** converts [OpenSpec](https://github.com/neurono-ml/openspec) `spec.md` files into deterministic [Cucumber](https://cucumber.io/) / Gherkin `.feature` files.
+**cucumber-openspec** bridges the two sides of [Behavior-Driven Development](https://cucumber.io/docs/bdd/) (BDD):
 
-It uses **zero-AI, deterministic TypeScript scripts** — a state-machine parser + generator — to produce correct `.feature` files in any of the [80 Gherkin languages](features/localization.md). No runtime dependencies beyond Node.js.
+- **✍️ Write** behavior specs in [OpenSpec](https://github.com/neurono-ml/openspec) — a simple, human-readable Markdown format that product managers, QA, and developers can all contribute to
+- **⚡ Convert** them deterministically into strict Cucumber/Gherkin `.feature` files — with **zero-AI, deterministic TypeScript** (state-machine parser + generator) in any of the [80 Gherkin languages](features/localization.md). No runtime dependencies beyond Node.js.
+
+The result? **One BDD spec, two formats.** Teams write and review in clean Markdown; automation runs the generated Gherkin in Cucumber, SpecFlow, Behave, or any BDD framework.
 
 ## Quick Start
 

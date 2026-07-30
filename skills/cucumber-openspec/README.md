@@ -21,7 +21,12 @@
 
 ---
 
-**cucumber-openspec** converts [OpenSpec](https://github.com/neurono-ml/openspec) behavior specifications (Markdown `spec.md` files) into strict [Cucumber](https://cucumber.io/)/Gherkin `.feature` files — with **zero AI dependencies**, a **deterministic state-machine parser**, and support for all **80 Gherkin languages**.
+**cucumber-openspec** bridges the two sides of [Behavior-Driven Development](https://cucumber.io/docs/bdd/) (BDD):
+
+- **🖊️ Write** behavior specs in [OpenSpec](https://github.com/neurono-ml/openspec) — a simple, human-readable Markdown format that product managers, QA, and developers can all contribute to
+- **⚡ Convert** them deterministically into strict [Cucumber](https://cucumber.io/)/Gherkin `.feature` files — with **zero AI dependencies**, a **deterministic state-machine parser**, and support for all **80 Gherkin languages**
+
+The result? **One BDD spec, two formats.** Teams write and review in clean Markdown; automation runs the generated Gherkin in Cucumber, SpecFlow, Behave, or any BDD framework.
 
 > **Read this document in other languages:**
 > [Português Brasileiro](./README.pt-BR.md) &nbsp;|&nbsp; [简体中文](./README.zh-CN.md)
@@ -55,13 +60,28 @@ npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o ./features
 
 ## 💡 Why cucumber-openspec?
 
-| Challenge | Solution |
+### The BDD Workflow That Scales
+
+BDD promises collaboration between product, dev, and QA — but most teams hit a wall: **Gherkin `.feature` files are the single source of truth, yet they're hard to write collaboratively.** cucumber-openspec fixes this by making [OpenSpec](https://github.com/neurono-ml/openspec) the source and Gherkin the generated output.
+
+```
+OpenSpec (Markdown)  ──→  cucumber-openspec  ──→  Gherkin (.feature)
+     ↑                                                   ↓
+Product / QA / Dev write here              Cucumber / SpecFlow / Behat run here
+```
+
+The key insight: **OpenSpec is a stricter, test-oriented superset of Markdown.** It reads like a design document but maps 1:1 to Gherkin constructs. Non-developers write specs; developers get executable tests. No one manually wrangles `.feature` syntax.
+
+### Why OpenSpec first?
+
+| Pain point | OpenSpec-first approach |
 |---|---|
-| **Writing Gherkin by hand is tedious** | Write concise Markdown specs — generate `.feature` files instantly |
-| **AI-generated Gherkin is unreliable** | 0% AI dependency — deterministic parser gives the same output every time |
-| **Multi-language teams** | All 80 Gherkin languages built in — no manual translation |
-| **Change management** | Delta sections (`ADDED`/`MODIFIED`/`REMOVED`) map directly to Gherkin annotations |
-| **Continuous integration** | Run the converter in CI — specs become living documentation |
+| **Gherkin syntax is verbose and error-prone** | OpenSpec is clean Markdown — write bullets, not `Feature:`/`Scenario:` keywords |
+| **Non-devs can't write `.feature` files** | Anyone who knows Markdown can write OpenSpec specs |
+| **Specs and tests drift apart** | OpenSpec IS the source — Gherkin is always regenerated from it |
+| **AI-generated Gherkin hallucinates** | 0% AI — deterministic parser gives the same output every time |
+| **Multi-language teams** | Write specs in English, generate Gherkin in all 80 languages |
+| **Specs evolve over time** | Built-in ADDED/MODIFIED/REMOVED delta sections |
 | **No runtime bloat** | Pure TypeScript, zero npm dependencies at runtime |
 
 ---
@@ -70,10 +90,10 @@ npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o ./features
 
 ```mermaid
 flowchart LR
-    A["📄 OpenSpec spec.md\nMarkdown with Given/When/Then"] --> B["🔍 openspec-parser.ts\nDeterministic state machine\n(0 deps)"]
+    A["✍️ OpenSpec Spec\nBDD in clean Markdown\nProduct/QA/Dev write here"] --> B["🔍 openspec-parser.ts\nDeterministic state machine\n(0 deps)"]
     B --> C["🏗️ OpenSpec AST\nFeature → Rule → Scenario\nTags • Background • DataTables • Outlines"]
-    C --> D["⚡ gherkin-generator.ts\nKeyword localization\nDocument-String mapping"]
-    D --> E["✅ .feature file\nValidated via\n@cucumber/gherkin AST"]
+    C --> D["⚡ gherkin-generator.ts\n80-language keyword mapping\nDoc String translation"]
+    D --> E["🧪 Executable Gherkin\nValided via @cucumber/gherkin\nCucumber / SpecFlow / Behat"]
     
     style A fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
     style B fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1

@@ -18,7 +18,12 @@
 
 ---
 
-**cucumber-openspec** 可以将 [OpenSpec](https://github.com/neurono-ml/openspec) 行为规范（Markdown `spec.md` 文件）转换为严格的 [Cucumber](https://cucumber.io/)/Gherkin `.feature` 文件——**零 AI 依赖**，使用**确定性状态机解析器**，支持全部 **80 种 Gherkin 语言**。
+**cucumber-openspec** 连接了[行为驱动开发](https://cucumber.io/docs/bdd/)（BDD）的两端：
+
+- **🖊️ 编写** [OpenSpec](https://github.com/neurono-ml/openspec) 行为规范——一种简单、人类可读的 Markdown 格式，产品经理、QA 和开发人员都可以共同参与
+- **⚡ 转换** 为严格的 [Cucumber](https://cucumber.io/)/Gherkin `.feature` 文件——**零 AI 依赖**，使用**确定性状态机解析器**，支持全部 **80 种 Gherkin 语言**
+
+结果？**一份 BDD 规范，两种格式。** 团队用简洁的 Markdown 编写和评审；自动化工具在 Cucumber、SpecFlow、Behave 或任何 BDD 框架中运行生成的 Gherkin。
 
 > **阅读本文档的其他语言版本：**
 > [English](./README.md) &nbsp;|&nbsp; [Português Brasileiro](./README.pt-BR.md)
@@ -52,13 +57,28 @@ npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o ./features
 
 ## 💡 为什么选择 cucumber-openspec？
 
-| 挑战 | 解决方案 |
+### 可扩展的 BDD 工作流
+
+BDD 承诺产品、开发和 QA 之间的协作——但大多数团队会遇到一个障碍：**Gherkin `.feature` 文件是唯一的事实来源，但它们难以协作编写。** cucumber-openspec 通过将 [OpenSpec](https://github.com/neurono-ml/openspec) 作为源头、Gherkin 作为生成的输出来解决这个问题。
+
+```
+OpenSpec (Markdown)  ──→  cucumber-openspec  ──→  Gherkin (.feature)
+     ↑                                                   ↓
+产品 / QA / 开发人员在这里编写           Cucumber / SpecFlow / Behat 在这里运行
+```
+
+关键洞察：**OpenSpec 是 Markdown 的面向测试的超集。** 它读起来像设计文档，但可以 1:1 映射到 Gherkin 结构。非开发人员编写规范；开发人员获得可执行的测试。无需手动处理 `.feature` 语法。
+
+### 为什么首选 OpenSpec？
+
+| 痛点 | OpenSpec 优先的方法 |
 |---|---|
-| **手动编写 Gherkin 繁琐耗时** | 编写简洁的 Markdown 规范 —— 即时生成 `.feature` 文件 |
-| **AI 生成的 Gherkin 不可靠** | 0% AI 依赖 —— 确定性解析器每次输出相同结果 |
-| **多语言团队协作** | 内置全部 80 种 Gherkin 语言 —— 无需手动翻译 |
-| **变更管理** | 增量章节（`ADDED`/`MODIFIED`/`REMOVED`）直接映射到 Gherkin 注释 |
-| **持续集成** | 在 CI 中运行转换器 —— 规范成为活文档 |
+| **Gherkin 语法冗长且易出错** | OpenSpec 是简洁的 Markdown——编写列表项，而不是 `Feature:`/`Scenario:` 关键字 |
+| **非开发人员无法编写 `.feature` 文件** | 任何了解 Markdown 的人都可以编写 OpenSpec 规范 |
+| **规范和测试逐渐脱节** | OpenSpec 就是源头——Gherkin 始终从中重新生成 |
+| **AI 生成的 Gherkin 会产生幻觉** | 0% AI——确定性解析器每次输出相同结果 |
+| **多语言团队** | 用英文编写规范，生成所有 80 种语言的 Gherkin |
+| **规范随时间演变** | 内置 ADDED/MODIFIED/REMOVED 增量章节 |
 | **零运行时臃肿** | 纯 TypeScript，运行时零 npm 依赖 |
 
 ---
@@ -67,10 +87,10 @@ npx tsx scripts/index.ts -i openspec/specs/auth/spec.md -o ./features
 
 ```mermaid
 flowchart LR
-    A["📄 OpenSpec spec.md\n包含假如/当/那么的 Markdown"] --> B["🔍 openspec-parser.ts\n确定性状态机\n(0 依赖)"]
+    A["✍️ OpenSpec Spec\nBDD 用简洁 Markdown\n产品/QA/开发编写"] --> B["🔍 openspec-parser.ts\n确定性状态机\n(0 依赖)"]
     B --> C["🏗️ OpenSpec AST\n功能 → 规则 → 场景\n标签 • 背景 • 数据表 • 大纲"]
-    C --> D["⚡ gherkin-generator.ts\n关键字本地化\n文档字符串映射"]
-    D --> E["✅ .feature 文件\n经由\n@cucumber/gherkin AST 验证"]
+    C --> D["⚡ gherkin-generator.ts\n80 种语言关键字映射\n文档字符串转换"]
+    D --> E["🧪 可执行 Gherkin\n经由 @cucumber/gherkin 验证\nCucumber / SpecFlow / Behat"]
     
     style A fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
     style B fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1
