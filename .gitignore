@@ -1,0 +1,4 @@
+node_modules/
+features/
+tmp-test-*/
+.playwright-mcp/
